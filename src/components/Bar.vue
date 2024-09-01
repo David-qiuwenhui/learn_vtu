@@ -1,7 +1,14 @@
 <template>
   <div>
-    {{ users }}
-    <button id="getUsersBtn" @click="handleGetUsers">getUsers</button>
+    <div>
+      {{ users }}
+      <button id="getUsersBtn" @click="handleGetUsers">getUsers</button>
+    </div>
+
+    <div>
+      <div v-if="boxOneRender" id="box1">box1</div>
+      <div v-show="boxTwoVisible" id="box2">box2</div>
+    </div>
   </div>
 </template>
 
@@ -10,7 +17,9 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      users: []
+      users: [],
+      boxOneRender: false,
+      boxTwoVisible: false
     }
   },
   methods: {

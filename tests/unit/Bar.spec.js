@@ -13,7 +13,7 @@ jest.mock('axios', () => {
   }
 })
 
-describe('Bar.vue', () => {
+describe('Bar.vue async', () => {
   it('get users data', async () => {
     const wrapper = mount(Bar)
     await wrapper.get('#getUsersBtn').trigger('click')
@@ -21,5 +21,50 @@ describe('Bar.vue', () => {
     // 确保所有已解析的 Promise 都被执行
     await flushPromises()
     expect(wrapper.text()).toContain('new data')
+  })
+})
+
+describe('Bar.vue condition render', () => {
+  it('box1 render', () => {
+    const wrapper = mount(Bar)
+    const targetWrapper = wrapper.find('#box1')
+
+    expect(targetWrapper.exists()).toBe(false)
+  })
+
+  it('box1 render', () => {
+    const wrapper = mount(Bar, {
+      data() {
+        return {
+          boxOneRender: true
+        }
+      }
+    })
+    const targetWrapper = wrapper.get('#box1')
+
+    expect(targetWrapper.exists()).toBe(true)
+    expect(targetWrapper.text()).toContain('box1')
+  })
+
+  it('box2 not visible', () => {
+    const wrapper = mount(Bar)
+    const targetWrapper = wrapper.get('#box2')
+
+    expect(targetWrapper.exists()).toBe(true)
+    expect(targetWrapper.isVisible()).toBe(false)
+  })
+
+  it('box2 visible', () => {
+    const wrapper = mount(Bar, {
+      data() {
+        return {
+          boxTwoVisible: true
+        }
+      }
+    })
+    const targetWrapper = wrapper.get('#box2')
+
+    expect(targetWrapper.exists()).toBe(true)
+    expect(targetWrapper.isVisible()).toBe(true)
   })
 })
