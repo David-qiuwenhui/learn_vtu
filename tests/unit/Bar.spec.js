@@ -68,3 +68,18 @@ describe('Bar.vue condition render', () => {
     expect(targetWrapper.isVisible()).toBe(true)
   })
 })
+
+describe('Bar.vue emitted', () => {
+  it('increment emitted', () => {
+    const wrapper = mount(Bar)
+    const targetWrapper = wrapper.get('#incrementBtn')
+    expect(targetWrapper.exists()).toBe(true)
+
+    targetWrapper.trigger('click')
+    targetWrapper.trigger('click')
+    expect(wrapper.emitted()).toHaveProperty('increment')
+    expect(wrapper.emitted('increment')).toBeTruthy()
+    expect(wrapper.emitted('increment')[0]).toEqual([0])
+    expect(wrapper.emitted('increment')[1]).toEqual([1])
+  })
+})
