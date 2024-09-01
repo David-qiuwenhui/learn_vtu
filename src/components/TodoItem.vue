@@ -5,9 +5,10 @@
       :class="{ completed: this.state === 'completed' }"
     >
       {{ this.content }}
+      <slot></slot>
     </span>
 
-    <button data-testid="remove" @click="remove">remove</button>
+    <button id="removeBtn" data-testid="remove" @click="remove">remove</button>
     <button data-testid="complete" @click="handleComplete">complete</button>
   </div>
 </template>
