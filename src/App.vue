@@ -2,17 +2,22 @@
   <div id="app">
     <TodoList></TodoList>
     <foo></foo>
+    <Layout>
+      <template #header="data"> data.msg: {{ data.msg }} </template>
+    </Layout>
   </div>
 </template>
 
 <script>
 import TodoList from './components/TodoList'
 import Foo from './components/Foo.vue'
+import Layout from './components/Layout.vue'
 export default {
   name: 'App',
   components: {
     TodoList,
-    Foo
+    Foo,
+    Layout
   }
 }
 </script>
